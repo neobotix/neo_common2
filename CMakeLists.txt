@@ -13,15 +13,21 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+add_library(neo_common2 INTERFACE)
+target_include_directories(neo_common2 INTERFACE
+  "$<INSTALL_INTERFACE:include>")
+
 include_directories(
     include
     ${Boost_INCLUDE_DIRS}
 )
 
+install(TARGETS neo_common2 EXPORT export_neo_common2)
 
 install(DIRECTORY include/
   DESTINATION include
 )
 
 ament_export_include_directories(include)
+ament_export_targets(export_neo_common2)
 ament_package()
